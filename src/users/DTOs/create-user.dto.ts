@@ -10,4 +10,6 @@ export class CreateUserDto {
 
   @IsString()
   readonly country: string;
+
+  readonly password: string;
 }
