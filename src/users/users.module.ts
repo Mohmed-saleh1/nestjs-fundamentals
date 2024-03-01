@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Injectable, Module } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 
@@ -7,6 +7,14 @@ class MockUserService {
     return ['user11', 'user2'];
   }
 }
+
+@Injectable()
+class UserHabitsFactory {
+  getHabits() {
+    return ['eat', 'sleep', 'code'];
+  }
+}
+
 @Module({
   controllers: [UsersController],
   providers: [
@@ -17,6 +25,10 @@ class MockUserService {
     {
       provide: 'APP_NAME',
       useValue: 'Nest Demo api',
+    },
+    {
+      provide: 'USER_HAPPITS',
+      useFactory: () => ['eat', 'sleep', 'code'],
     },
   ],
 })
